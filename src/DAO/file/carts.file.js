@@ -1,8 +1,8 @@
 import FileManager from "./fileManager";
 
-export default class Ticket {
+export default class Cart {
     constructor() {
-        this.file = new FileManager('./db/tickets.json')
+        this.file = new FileManager('./db/carts.json')
     }
 
     get = async () => await this.FileManager.get();

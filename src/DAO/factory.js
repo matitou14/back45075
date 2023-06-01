@@ -1,18 +1,19 @@
 import mongoose from 'mongoose'
 import config from '../config/config.js'
+import Cart from './mongo/cart.mongo.js'
 
 export let User 
-export let Ticket
+export let Cart
 
 switch (config.persistence) {
     case "FILE":
         const {default:UserFile} = await import ('./file/users.file.js')
-        const {default:TicketFile} = await import ('./file/tickets.file.js')
+        const {default:CartFile} = await import ('./file/carts.file.js')
         User = UserFile
-        Ticket = TicketFile
+        Cart = CartFile
         break;
     case "MONGO":
-        mongoose.connect(config.mongoURI, {
+       await  mongoose.connect(config.mongoURI, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
             dbName: config.mongoDBName,
@@ -20,9 +21,9 @@ switch (config.persistence) {
 
 
         const {default:UserMongo} = await import ('./mongo/users.mongo.js')
-        const {default:TicketMongo} = await import ('./mongo/tickets.mongo.js')
+        const {default:CartMongo} = await import ('./mongo/cart.mongo.js')
         User = UserMongo
-        Ticket = TicketMongo
+        Cart = CartMongo
         break;
 
 
